@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>HSN Code Validator</title>
+</head>
+<body>
+    <h1>HSN Code Validator</h1>
+    <form method="post">
+        <label>Enter HSN Codes (comma-separated):</label><br>
+        <input type="text" name="codes" style="width: 300px;" required><br><br>
+        <button type="submit">Validate</button>
+    </form>
+
+    {% if results %}
+        <h2>Results:</h2>
+        <ul>
+        {% for result in results %}
+            <li>
+                {{ result.code }} →
+                {% if result.valid %}
+                    VALID – {{ result.description }}
+                {% else %}
+                    INVALID – {{ result.reason }}
+                {% endif %}
+            </li>
+        {% endfor %}
+        </ul>
+    {% endif %}
+</body>
+</html>
