@@ -2,29 +2,62 @@
 <html>
 <head>
     <title>HSN Code Validator</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: flex-start;
+            padding: 50px;
+        }
+        .container {
+            width: 100%;
+            max-width: 600px;
+            text-align: center;
+        }
+        form {
+            margin-bottom: 20px;
+        }
+        input[type="text"] {
+            width: 100%;
+            padding: 10px;
+        }
+        button {
+            padding: 8px 16px;
+        }
+        ul {
+            list-style-type: none;
+            padding-left: 0;
+        }
+        li {
+            margin: 6px 0;
+        }
+        a {
+            color: blue;
+            text-decoration: none;
+        }
+    </style>
 </head>
 <body>
-    <h1>HSN Code Validator</h1>
-    <form method="post">
-        <label>Enter HSN Codes (comma-separated):</label><br>
-        <input type="text" name="codes" style="width: 300px;" required><br><br>
-        <button type="submit">Validate</button>
-    </form>
+    <div class="container">
+        <h1>HSN Code Validator</h1>
+        <form method="post">
+            <label>Enter HSN Codes (comma-separated):</label><br><br>
+            <input type="text" name="codes" required><br><br>
+            <button type="submit">Validate</button>
+        </form>
 
-    {% if results %}
-        <h2>Results:</h2>
-        <ul>
-        {% for result in results %}
-            <li>
-                {{ result.code }} →
-                {% if result.valid %}
-                    VALID – {{ result.description }}
-                {% else %}
-                    INVALID – {{ result.reason }}
-                {% endif %}
-            </li>
-        {% endfor %}
-        </ul>
-    {% endif %}
+        <p><a href="/memory">View Memory (Validation History)</a></p>
+
+        {% if results %}
+            <h2>Validation Results:</h2>
+            <ul>
+            {% for result in results %}
+                <li>{{ result.code }} : {{ result }}</li>
+            {% endfor %}
+            </ul>
+        {% endif %}
+    </div>
 </body>
 </html>

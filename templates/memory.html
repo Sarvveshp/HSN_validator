@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Validation Memory</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: flex-start;
+            padding: 50px;
+        }
+        table {
+            border-collapse: collapse;
+            width: 80%;
+            max-width: 800px;
+            margin-top: 20px;
+        }
+        th, td {
+            padding: 12px;
+            border: 1px solid #ddd;
+            text-align: center;
+        }
+        th {
+            background-color: #f2f2f2;
+        }
+        a {
+            color: blue;
+            text-decoration: none;
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Validation History (Memory)</h1>
+    <p><a href="/">← Back to Home</a></p>
+
+    {% if memory %}
+        <table>
+            <thead>
+                <tr>
+                    <th>HSN Code</th>
+                    <th>Valid</th>
+                    <th>Description / Reason</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for item in memory %}
+                    <tr>
+                        <td>{{ item.code }}</td>
+                        <td>{{ item.valid }}</td>
+                        <td>
+                            {% if item.valid %}
+                                {{ item.description }}
+                            {% else %}
+                                {{ item.reason }}
+                            {% endif %}
+                        </td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    {% else %}
+        <p>No codes have been validated yet.</p>
+    {% endif %}
+</body>
+</html>
